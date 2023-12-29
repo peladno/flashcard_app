@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://Javier-P-rez-s-workspace-ih4m5j.ap-southeast-2.xata.sh/db/flashcards",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}
