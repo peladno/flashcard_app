@@ -1,27 +1,29 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response, NextFunction, Application } from 'express';
 import dotenv from 'dotenv';
 import { XataClient } from './xata';
 import { validationResult } from 'express-validator';
 import { cardsCapitals, cardsProgramming, sets } from './seed_database';
 import {
   createSet,
+  deleteSet,
   getAllSets,
   getSetById,
   getSets,
   getUserSets,
   userSetFav,
 } from './controllers/set.controller';
+import { addCardToSet, getAllCards } from './controllers/card.controller';
+import logger from './logger/logger';
 dotenv.config();
 
 const { PORT } = process.env || 3000;
-
-const app = express();
+const app: Application = express();
 
 app.use(express.json({ limit: '50mb' }));
 
 export const client = new XataClient({ apiKey: process.env.XATA_API_KEY });
 
-//middlewares
+//---------- middlewares ---------
 const validateSet = (req: Request, res: Response, next: NextFunction) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -39,7 +41,7 @@ const errorHandler = (
   console.error(err);
   res.status(500).json({ error: 'Internal Server Error' });
 };
-//
+//------- end middlewares -------
 
 app.use(errorHandler);
 
@@ -61,8 +63,11 @@ app.get('/sets', getSets);
 app.get('/sets/:id', getSetById);
 app.post('/sets', validateSet, createSet);
 app.post('/usersets', userSetFav);
-app.get('/userserts', getUserSets);
+app.get('/usersets', getUserSets);
+app.delete('/sets/:id', deleteSet);
+app.get('/cards', getAllCards);
+app.post('/cards', addCardToSet);
 
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  logger.info(`Server is running on port ${PORT}`);
 });
