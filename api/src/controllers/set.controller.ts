@@ -44,7 +44,7 @@ const createSet = async (req: Request, res: Response, next: NextFunction) => {
         : null,
     });
 
-    return res.json(set);
+    return res.status(200).json(set);
   } catch (error) {
     next(error); // Pass the error to the error handling middleware
   }
@@ -53,7 +53,7 @@ const createSet = async (req: Request, res: Response, next: NextFunction) => {
 const getAllSets = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const sets = await client.db.sets.getAll();
-    return res.json({ results: sets });
+    return res.status(200).json({ results: sets });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -78,11 +78,31 @@ const getSetById = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
     const set = await client.db.sets.read(id);
-    return res.json(set);
+    return res.status(200).json(set);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 };
 
-export { createSet, getAllSets, getSetById, getSets };
+const userSetFav = async (req: Request, res: Response, next: NextFunction) => {
+  const { user, set } = req.body;
+  const userSet = await client.db.user_sets.create({
+    user,
+    set,
+  });
+
+  return res.status(200).json(userSet);
+};
+
+const getUserSets = async (req: Request, res: Response, next: NextFunction) => {
+  const { user } = req.query;
+
+  const sets = await client.db.user_sets
+    .select(['id', 'set.*'])
+    .filter({ user: `${user}` })
+    .getAll();
+  return res.status(200).json(sets);
+};
+
+export { createSet, getAllSets, getSetById, getSets, userSetFav, getUserSets };

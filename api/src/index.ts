@@ -8,6 +8,8 @@ import {
   getAllSets,
   getSetById,
   getSets,
+  getUserSets,
+  userSetFav,
 } from './controllers/set.controller';
 dotenv.config();
 
@@ -58,6 +60,8 @@ app.get('/', getAllSets);
 app.get('/sets', getSets);
 app.get('/sets/:id', getSetById);
 app.post('/sets', validateSet, createSet);
+app.post('/usersets', userSetFav);
+app.get('/userserts', getUserSets);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
