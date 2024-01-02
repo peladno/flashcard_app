@@ -5,22 +5,46 @@ export const USER_STORAGE_KEY = 'userid';
 //
 // INTERFACES
 //
-export interface Set {
+export type Set = {
   cards: number;
   description: string;
   creator: string;
   id: string;
   title: string;
-  image?: any;
-}
+  image?: Image;
+  xata: Xata;
+};
 
-export interface Card {
+export type Card = {
   answer: string;
   id: string;
   question: string;
-  image?: any;
+  image?: Image;
   set: string;
-}
+};
+
+export type Image = {
+  attributes: Attributes;
+  enablePublicUrl: boolean;
+  mediaType: string;
+  name: string;
+  signedUrlTimeout: number;
+  size: number;
+  uploadUrlTimeout: number;
+  url: string;
+  version: number;
+};
+
+export type Attributes = {
+  height: number;
+  width: number;
+};
+
+export type Xata = {
+  createdAt: Date;
+  updatedAt: Date;
+  version: number;
+};
 
 //
 // SET CALLS

@@ -12,6 +12,10 @@ const Layout = () => {
       }}
     >
       <Stack.Screen name='(tabs)' options={{ headerShown: false }} />
+      <Stack.Screen
+        name='(modals)/set/[id]'
+        options={{ presentation: 'modal', title: '' }}
+      />
     </Stack>
   );
 };

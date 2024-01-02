@@ -3,6 +3,7 @@ import React from 'react';
 import { Link, Tabs } from 'expo-router';
 import Colors from '@/constants/Colors';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import 'react-native-url-polyfill/auto';
 
 const Layout = () => {
   return (
@@ -36,7 +37,7 @@ const Layout = () => {
       <Tabs.Screen
         name='Search'
         options={{
-          title: 'My Sets',
+          title: 'Search',
           tabBarIcon: ({ size, color }) => (
             <Ionicons name='search-outline' color={color} size={size} />
           ),
@@ -45,7 +46,7 @@ const Layout = () => {
       <Tabs.Screen
         name='Profile'
         options={{
-          title: 'My Sets',
+          title: 'Profile',
           tabBarIcon: ({ size, color }) => (
             <Ionicons name='person-outline' color={color} size={size} />
           ),
