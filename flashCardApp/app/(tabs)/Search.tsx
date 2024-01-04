@@ -25,13 +25,15 @@ const Search = () => {
   }, []);
 
   const loadSets = async () => {
-    const data = await getSets();
-
-    if (data) {
-      setSets(data);
+    try {
+      const data = await getSets();
+      if (data) {
+        setSets(data);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
-  console.log(set[0]);
 
   const renderSetRow: ListRenderItem<Set> = ({ item }) => {
     return (

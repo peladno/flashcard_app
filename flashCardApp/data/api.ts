@@ -11,7 +11,7 @@ export type Set = {
   creator: string;
   id: string;
   title: string;
-  image?: Image;
+  image?: Image | null;
   xata: Xata;
 };
 
