@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Set, addToFavorites, getSet } from '@/data/api';
 import { defaultStyles } from '@/constants/Styles';
-import Colors from '@/constants/Colors';
-import Button from '@/components/Button';
+import { BottomButton } from '@/components/Button';
 
 const Page = () => {
   const [set, setSet] = useState<Set>();
@@ -42,7 +41,7 @@ const Page = () => {
           {set?.image && (
             <Image
               source={{ uri: set.image.url }}
-              style={{ width: '100%', height: 250 }}
+              style={{ width: '100%', height: 250, marginTop: 16 }}
               resizeMode='contain'
             />
           )}
@@ -52,7 +51,7 @@ const Page = () => {
       )}
 
       <View style={{ alignItems: 'center' }}>
-        <Button onPress={onAddFav} text='Add to Favorites' />
+        <BottomButton onPress={onAddFav} text='Add to Favorites' />
       </View>
     </View>
   );

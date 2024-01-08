@@ -31,4 +31,15 @@ export const defaultStyles = StyleSheet.create({
     marginVertical: 4,
     backgroundColor: Colors.light.white,
   },
+  button: {
+    backgroundColor: Colors.light.primary,
+    padding: 16,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#ccc',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 8,
+  },
 });

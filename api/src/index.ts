@@ -14,6 +14,8 @@ import {
 } from './controllers/set.controller';
 import { addCardToSet, getAllCards } from './controllers/card.controller';
 import logger from './logger/logger';
+import cors from 'cors';
+
 dotenv.config();
 
 const { PORT } = process.env || 3000;
@@ -42,7 +44,7 @@ const errorHandler = (
   res.status(500).json({ error: 'Internal Server Error' });
 };
 //------- end middlewares -------
-
+app.use(cors());
 app.use(errorHandler);
 
 app.get('/init', async (req: Request, res: Response) => {

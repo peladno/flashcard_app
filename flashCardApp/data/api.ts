@@ -13,6 +13,7 @@ export type Set = {
   title: string;
   image?: Image | null;
   xata: Xata;
+  private: boolean;
 };
 
 export type Card = {
@@ -83,7 +84,7 @@ export const getMySets = async (): Promise<
   const data = await response.json();
   return data.map((item: any) => ({
     ...item,
-    canEdit: item.set.creator === user,
+    canEdit: item.set?.creator === user,
   }));
 };
 

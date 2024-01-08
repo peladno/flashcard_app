@@ -32,7 +32,35 @@ const Layout = () => {
       />
       <Stack.Screen
         name='(modals)/set/Create'
-        options={{ presentation: 'modal', title: 'Create Card Set' }}
+        options={{
+          presentation: 'modal',
+          title: 'Create Card Set',
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => router.back()}>
+              <Ionicons
+                name='close-outline'
+                size={24}
+                color={Colors.light.white}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name='(modals)/(cards)/[id]'
+        options={{
+          presentation: 'modal',
+          title: 'Update set card',
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => router.back()}>
+              <Ionicons
+                name='close-outline'
+                size={24}
+                color={Colors.light.white}
+              />
+            </TouchableOpacity>
+          ),
+        }}
       />
     </Stack>
   );
