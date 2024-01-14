@@ -11,7 +11,7 @@ export const defaultStyles = StyleSheet.create({
     bottom: 40,
     width: 300,
     flex: 1,
-    backgroundColor: Colors.light.primary,
+    backgroundColor: Colors.light.button,
     padding: 16,
     borderRadius: 8,
     borderWidth: 1,
@@ -32,7 +32,7 @@ export const defaultStyles = StyleSheet.create({
     backgroundColor: Colors.light.white,
   },
   button: {
-    backgroundColor: Colors.light.primary,
+    backgroundColor: Colors.light.button,
     padding: 16,
     borderRadius: 8,
     borderWidth: 1,
@@ -41,5 +41,11 @@ export const defaultStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     gap: 8,
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginVertical: 40,
+    textAlign: 'center',
   },
 });

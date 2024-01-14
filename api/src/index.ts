@@ -12,7 +12,13 @@ import {
   getUserSets,
   userSetFav,
 } from './controllers/set.controller';
-import { addCardToSet, getAllCards } from './controllers/card.controller';
+import {
+  addCardToSet,
+  getAllCards,
+  getCardsToLearn,
+  learning,
+  learningProgress,
+} from './controllers/card.controller';
 import logger from './logger/logger';
 import cors from 'cors';
 
@@ -69,6 +75,9 @@ app.get('/usersets', getUserSets);
 app.delete('/sets/:id', deleteSet);
 app.get('/cards', getAllCards);
 app.post('/cards', addCardToSet);
+app.get('/cards/learn', getCardsToLearn);
+app.post('/cards/learnings', learning);
+app.post('/cards/progress', learningProgress);
 
 app.listen(PORT, () => {
   logger.info(`Server is running on port ${PORT}`);
