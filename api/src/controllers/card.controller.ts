@@ -47,9 +47,14 @@ const getAllCards = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-const getCardsToLearn = async (res: Response, req: Request) => {
+const getCardsToLearn = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const { setId, limit } = req.query;
+
     const cards = await client.db.cards
       .select(['question', 'answer', 'image'])
       .filter({ set: setId })

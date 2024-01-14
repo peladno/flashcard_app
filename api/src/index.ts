@@ -77,7 +77,7 @@ app.get('/cards', getAllCards);
 app.post('/cards', addCardToSet);
 app.get('/cards/learn', getCardsToLearn);
 app.post('/cards/learnings', learning);
-app.post('/cards/progress', learningProgress);
+app.get('/cards/progress', learningProgress);
 
 app.listen(PORT, () => {
   logger.info(`Server is running on port ${PORT}`);
