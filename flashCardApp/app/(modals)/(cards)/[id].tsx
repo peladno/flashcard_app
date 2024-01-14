@@ -1,11 +1,19 @@
-import { View, Text, TouchableOpacity } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  ListRenderItem,
+  StyleSheet,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { Stack, useLocalSearchParams, useRouter } from 'expo-router';
-import { Card, deleteSet, getCardsForSet } from '@/data/api';
+import { Card, createCard, deleteSet, getCardsForSet } from '@/data/api';
 import { defaultStyles } from '@/constants/Styles';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import Colors from '@/constants/Colors';
 import CustomTextInput from '@/components/CustomTextInput';
+import { Button } from '@/components/Button';
 
 const Page = () => {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -26,7 +34,30 @@ const Page = () => {
     loadCards();
   }, [id]);
 
-  const onAddCard = async () => {};
+  const renderCard: ListRenderItem<Card> = ({ item }) => (
+    <View
+      key={item.id}
+      style={{
+        padding: 16,
+        borderWidth: 1,
+        borderColor: Colors.light.darkGrey,
+        borderRadius: 20,
+        backgroundColor: Colors.light.white,
+      }}
+    >
+      <Text style={{ fontWeight: 'bold', fontSize: 15 }}>
+        Question: {item.question}
+      </Text>
+      <Text style={{ fontSize: 12 }}>Answer: {item.answer}</Text>
+    </View>
+  );
+
+  const onAddCard = async () => {
+    const newCard = await createCard({ set: id, ...info });
+    setCards([...cards, newCard]);
+    setInfo({ question: '', answer: '' });
+  };
+
   const onDeleteSet = async () => {
     deleteSet(id);
     router.back();
@@ -56,11 +87,17 @@ const Page = () => {
       />
       <CustomTextInput
         placeholder={'Answer'}
-        value={info.question}
+        value={info.answer}
         onChangeText={(text) => setInfo({ ...info, answer: text })}
       />
+      <Button onPress={onAddCard} text='Add Card' />
+      <View style={{ marginTop: 29 }}>
+        <FlatList data={cards} renderItem={renderCard} />
+      </View>
     </View>
   );
 };
 
 export default Page;
+
+const styles = StyleSheet.create({});
