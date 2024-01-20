@@ -76,8 +76,8 @@ app.delete('/sets/:id', deleteSet);
 app.get('/cards', getAllCards);
 app.post('/cards', addCardToSet);
 app.get('/cards/learn', getCardsToLearn);
-app.post('/cards/learnings', learning);
-app.get('/cards/progress', learningProgress);
+app.post('/learnings', learning);
+app.get('/progress', learningProgress);
 
 app.listen(PORT, () => {
   logger.info(`Server is running on port ${PORT}`);
