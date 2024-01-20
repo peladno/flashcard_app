@@ -2,9 +2,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const API_URL = process.env.EXPO_PUBLIC_API_URL;
 export const USER_STORAGE_KEY = 'userid';
 
-//
-// INTERFACES
-//
 export type Set = {
   cards: number;
   description: string;
@@ -98,7 +95,7 @@ export const getSet = async (id: string): Promise<Set> => {
   return response.json();
 };
 
-export const addToFavorites = async (set: string) => {
+export const addToFavorites = async (setId: string) => {
   const user = await AsyncStorage.getItem(USER_STORAGE_KEY);
 
   const response = await fetch(`${API_URL}/usersets`, {
@@ -106,7 +103,7 @@ export const addToFavorites = async (set: string) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ user, set }),
+    body: JSON.stringify({ user, setId }),
   });
   return response.json();
 };
