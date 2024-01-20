@@ -94,13 +94,22 @@ const getSetById = async (req: Request, res: Response, next: NextFunction) => {
 
 const userSetFav = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { user, set } = req.body;
-    const userSet = await client.db.user_sets.create({
-      user,
-      set,
-    });
+    const { user, setId: set } = req.body;
 
-    return res.status(200).json(userSet);
+    const getSets = await client.db.user_sets
+      .select(['id', 'set.*'])
+      .filter({ user: `${user}`, 'set.id': set })
+      .getAll();
+
+    if (getSets.length === 0) {
+      const userSet = await client.db.user_sets.create({
+        user,
+        set,
+      });
+      return res.status(200).json(userSet);
+    } else {
+      return res.status(302).json({ message: 'Set already on favorites' });
+    }
   } catch (error) {
     logger.error(error, 'Error setting fav set');
     res.status(500).json({ error: 'Error setting fav set' });
