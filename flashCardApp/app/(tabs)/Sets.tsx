@@ -35,9 +35,10 @@ const Sets = () => {
     item: { set, canEdit },
   }) => (
     <View style={styles.setRow}>
-      <Text style={styles.rowTitle}>{set.title}</Text>
       <Link href={`/(learn)/${set.id}?limit=10`} asChild>
-        <Button text='Quiz' onPress={() => {}} size='small' />
+        <TouchableOpacity>
+          <Text style={styles.rowTitle}>{set.title}</Text>
+        </TouchableOpacity>
       </Link>
       {canEdit && (
         <Link href={`/(modals)/(cards)/${set.id}`} asChild>

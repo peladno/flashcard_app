@@ -47,9 +47,14 @@ export type Xata = {
   version: number;
 };
 
-//
-// SET CALLS
-//
+export type Progress = {
+  set: Set;
+  score: number;
+  cards_correct: number;
+  cards_wrong: number;
+  xata: any;
+};
+
 export const createSet = async (set: Partial<Set>) => {
   const user = await AsyncStorage.getItem(USER_STORAGE_KEY);
 
@@ -106,9 +111,6 @@ export const addToFavorites = async (set: string) => {
   return response.json();
 };
 
-//
-// CARDS CALLS
-//
 export const getLearnCards = async (setId: string, limit: string) => {
   const response = await fetch(
     `${API_URL}/cards/learn?setId=${setId}&limit=${limit}`
@@ -132,10 +134,6 @@ export const createCard = async (card: Partial<Card>) => {
   return response.json();
 };
 
-//
-// LEARNINGS CALLS
-//
-
 export const saveLearning = async (
   setId: string,
   cardsTotal: number,
@@ -157,6 +155,6 @@ export const saveLearning = async (
 export const getUserLearnings = async () => {
   const user = await AsyncStorage.getItem(USER_STORAGE_KEY);
 
-  const response = await fetch(`${API_URL}/learnings?user=${user}`);
+  const response = await fetch(`${API_URL}/progress?user=${user}`);
   return response.json();
 };

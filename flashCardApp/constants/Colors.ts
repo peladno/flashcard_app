@@ -8,7 +8,7 @@ export default {
     darkGrey: '#333',
     white: '#fff',
     lightGrey2: '#ccc',
-    button: '#5DA9E9',
+    button: '#003F91',
   },
   dark: {
     text: '#fff',

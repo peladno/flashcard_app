@@ -11,11 +11,9 @@ export const defaultStyles = StyleSheet.create({
     bottom: 40,
     width: 300,
     flex: 1,
-    backgroundColor: Colors.light.button,
+    backgroundColor: Colors.light.primary,
     padding: 16,
     borderRadius: 8,
-    borderWidth: 1,
-    borderColor: Colors.light.lightGrey2,
   },
   buttonText: {
     color: Colors.light.white,
